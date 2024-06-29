@@ -1,6 +1,7 @@
 <?php
 //loop end
 ?>
-</div>
-</div>
+        </div>
+    </div>
+</section>
 <?php echo 'loop_end.php'; ?>
