@@ -7,6 +7,9 @@ class Wordpress_Social_Reviews
     public function __construct()
     {
         add_action('init', array($this, 'create_social_review_posttype'));
+        add_action('init', array($this, 'social_review_register_post_meta'));
+        add_action('manage_social-review_posts_custom_column', array($this, 'social_review_columns_content'), 10, 2);
+        add_filter('manage_social-review_posts_columns', array($this, 'social_review_columns'));
     }
 
 
@@ -46,7 +49,7 @@ class Wordpress_Social_Reviews
             'social-review',
             array(
                 'labels' => array(
-                    'name' => __('Platform'),
+                    'name' => __('Social Platforms'),
                     'singular_name' => __('Platform'),
                     'search_items' => __('Search Platforms'),
                     'all_items' => __('All Platforms'),
@@ -58,26 +61,24 @@ class Wordpress_Social_Reviews
                 ),
                 'show_admin_column' => true,
                 'show_ui' => true,
-                'show_tagcloud' => false,
-                'hierarchical' => false,
+                'hierarchical' => true,
+                'show_in_rest' => true,
                 'quick_edit' => true,
-                'meta_box_cb' => 'post_categories_meta_box'
+                //'meta_box_cb' => 'post_categories_meta_box'
             )
         );
-
-        add_filter('manage_social-review_posts_columns', array($this, 'social_review_columns'));
-        add_action('manage_social-review_posts_custom_column', array($this, 'social_review_columns_content'), 10, 2);
     }
 
     public function social_review_columns($columns)
     {
         $columns = array(
             'cb' => '<input type="checkbox" />',
-            'title' => __('Title'),
-            'platform' => __('Platform'),
-            'author' => __('Author'),
-            'rating' => __('Rating'),
-            'date' => __('Import Date')
+            'title' => __('Title', 'social-reviews'),
+            'review_platform' => __('Platform', 'social-reviews'),
+            'review_author' => __('Author', 'social-reviews'),
+            'review_rating' => __('Rating', 'social-reviews'),
+            'review_date' => __('Review Date', 'social-reviews'),
+            'date' => __('Import Date', 'social-reviews')
         );
         return $columns;
     }
@@ -85,21 +86,44 @@ class Wordpress_Social_Reviews
     public function social_review_columns_content($column, $post_id)
     {
         switch ($column) {
-            case 'platform':
+            case 'review_platform':
                 $platform = get_the_terms($post_id, 'platform');
                 if ($platform && !is_wp_error($platform)) {
                     echo $platform[0]->name;
                 }
                 break;
-            case 'rating':
+            case 'review_rating':
                 $rating = get_post_meta($post_id, 'rating', true);
                 echo $rating;
                 break;
-            case 'author':
-                $author = get_post_meta($post_id, 'author', true);
+            case 'review_author':
+                $author = get_post_meta($post_id, 'review_author', true);
                 echo $author;
                 break;
+            case 'review_date':
+                $review_date = get_post_meta($post_id, 'review_date', true);
+                echo $review_date;
+                break;
         }
+    }
+
+    public function social_review_register_post_meta()
+    {
+        register_post_meta('social-review', 'rating', array(
+            'show_in_rest' => true,
+            'single' => true,
+            'type' => 'integer'
+        ));
+        register_post_meta('social-review', 'review_author', array(
+            'show_in_rest' => true,
+            'single' => true,
+            'type' => 'string'
+        ));
+        register_post_meta('social-review', 'review_date', array(
+            'show_in_rest' => true,
+            'single' => true,
+            'type' => 'string'
+        ));
     }
 
     public function generate_star_rating_logos($rating)
