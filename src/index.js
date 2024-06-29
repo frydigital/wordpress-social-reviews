@@ -14,7 +14,7 @@ registerBlockType( 'myguten/meta-block', {
 
         const [ meta, setMeta ] = useEntityProp( 'postType', postType, 'meta' );
 
-        const metaFieldValue = meta[ 'myguten_meta_block_field' ];
+        const metaFieldValue = meta[ 'review_rating' ];
         const updateMetaValue = ( newValue ) => {
             setMeta( { ...meta, myguten_meta_block_field: newValue } );
         };
@@ -22,7 +22,7 @@ registerBlockType( 'myguten/meta-block', {
         return (
             <div { ...blockProps }>
                 <TextControl
-                    label="Meta Block Field"
+                    label="Review Rating"
                     value={ metaFieldValue }
                     onChange={ updateMetaValue }
                 />

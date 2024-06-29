@@ -6,31 +6,31 @@ class Wordpress_Social_Reviews
 {
     public function __construct()
     {
-        add_action('init', array($this, 'create_social_review_posttype'));
-        add_action('init', array($this, 'social_review_register_post_meta'));
-        add_action('manage_social-review_posts_custom_column', array($this, 'social_review_columns_content'), 10, 2);
-        add_filter('manage_social-review_posts_columns', array($this, 'social_review_columns'));
+        add_action('init', array($this, 'create_social_reviews_posttype'));
+        add_action('init', array($this, 'social_reviews_register_post_meta'));
+        add_action('manage_social-reviews_posts_custom_column', array($this, 'social_reviews_columns_content'), 10, 2);
+        add_filter('manage_social-reviews_posts_columns', array($this, 'social_reviews_columns'));
     }
 
 
 
-    public function create_social_review_posttype()
+    public function create_social_reviews_posttype()
     {
 
         register_post_type(
-            'social-review',
+            'social-reviews',
             array(
                 'labels' => array(
                     'name' => __('Social Reviews'),
                     'singular_name' => __('Social Review'),
-                    'add_new' => __('Add New'),
-                    'add_new_item' => __('Add New Social Review'),
-                    'edit_item' => __('Edit Social Review'),
-                    'new_item' => __('New Social Review'),
-                    'view_item' => __('View Social Review'),
-                    'search_items' => __('Search Social Reviews'),
-                    'not_found' => __('No Social Reviews found'),
-                    'not_found_in_trash' => __('No Social Reviews found in Trash')
+                    'add_new' => __('Add New Review'),
+                    'add_new_item' => __('Add New Review'),
+                    'edit_item' => __('Edit Review'),
+                    'new_item' => __('New Review'),
+                    'view_item' => __('View Review'),
+                    'search_items' => __('Search Reviews'),
+                    'not_found' => __('No Reviews found'),
+                    'not_found_in_trash' => __('No Reviews found in Trash')
                 ),
                 'public' => true,
                 'publicly_queryable' => false,
@@ -46,7 +46,7 @@ class Wordpress_Social_Reviews
 
         register_taxonomy(
             'platform',
-            'social-review',
+            'social-reviews',
             array(
                 'labels' => array(
                     'name' => __('Social Platforms'),
@@ -57,7 +57,7 @@ class Wordpress_Social_Reviews
                     'update_item' => __('Update Platform'),
                     'add_new_item' => __('Add New Platform'),
                     'new_item_name' => __('New Platform Name'),
-                    'menu_name' => __('Platform')
+                    'menu_name' => __('Social Platforms')
                 ),
                 'show_admin_column' => true,
                 'show_ui' => true,
@@ -69,7 +69,7 @@ class Wordpress_Social_Reviews
         );
     }
 
-    public function social_review_columns($columns)
+    public function social_reviews_columns($columns)
     {
         $columns = array(
             'cb' => '<input type="checkbox" />',
@@ -83,7 +83,7 @@ class Wordpress_Social_Reviews
         return $columns;
     }
 
-    public function social_review_columns_content($column, $post_id)
+    public function social_reviews_columns_content($column, $post_id)
     {
         switch ($column) {
             case 'review_platform':
@@ -107,19 +107,19 @@ class Wordpress_Social_Reviews
         }
     }
 
-    public function social_review_register_post_meta()
+    public function social_reviews_register_post_meta()
     {
-        register_post_meta('social-review', 'rating', array(
+        register_post_meta('social-reviews', 'review_rating', array(
             'show_in_rest' => true,
             'single' => true,
             'type' => 'integer'
         ));
-        register_post_meta('social-review', 'review_author', array(
+        register_post_meta('social-reviews', 'review_author', array(
             'show_in_rest' => true,
             'single' => true,
             'type' => 'string'
         ));
-        register_post_meta('social-review', 'review_date', array(
+        register_post_meta('social-reviews', 'review_date', array(
             'show_in_rest' => true,
             'single' => true,
             'type' => 'string'

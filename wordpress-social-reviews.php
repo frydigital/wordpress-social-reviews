@@ -9,13 +9,16 @@ Author URI: https://frydigital.com/
 License: GPLv3
 */
 
-require_once(plugin_dir_path(__FILE__) . 'includes/class-social-reviews.php');
+require_once(plugin_dir_path(__FILE__) . 'includes/class-social-reviews-type.php');
 require_once(plugin_dir_path(__FILE__) . 'includes/class-social-reviews-shortcode.php');
+require_once(plugin_dir_path(__FILE__) . 'includes/class-social-reviews-admin.php');
+
 
 function social_reviews_init()
 {
   new Wordpress_Social_Reviews();
   new Wordpress_Social_Reviews_Shortcode();
+  new Wordpress_Social_Reviews_Admin();
 }
 
 add_action('plugins_loaded', 'social_reviews_init');
@@ -31,6 +34,7 @@ add_action('plugins_loaded', 'social_reviews_init');
  */
 
 require 'plugin-update-checker/plugin-update-checker.php';
+
 use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
 
 $myUpdateChecker = PucFactory::buildUpdateChecker(

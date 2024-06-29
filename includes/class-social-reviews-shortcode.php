@@ -19,7 +19,7 @@ class Wordpress_Social_Reviews_Shortcode extends Wordpress_Social_Reviews
         ), $atts);
 
         $args = array(
-            'post_type' => 'social-review',
+            'post_type' => 'social-reviews',
             'posts_per_page' => $atts['qty'],
             'orderby' => 'date',
             'order' => 'DESC'
@@ -47,13 +47,13 @@ class Wordpress_Social_Reviews_Shortcode extends Wordpress_Social_Reviews
     public function render_template($reviews, $template)
     {
         if ($reviews) {
-            ob_start();
+            //ob_start();
             include(plugin_dir_path(__FILE__) . '../public/templates/loop_start.php');
             foreach ($reviews->posts as $review) {
                 include(plugin_dir_path(__FILE__) . '../public/templates/' . $template . '.php');
             }
             include(plugin_dir_path(__FILE__) . '../public/templates/loop_end.php');
-            return ob_get_clean();
+            //return ob_get_clean();
         }
     }
 }
