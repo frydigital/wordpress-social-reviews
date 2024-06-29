@@ -18,6 +18,6 @@ if ($platform) {
     </span>
     <blockquote>
         <h4><?php echo get_the_title($review->ID); ?></h4>
-        <p><?php echo wp_strip_all_tags($review->post_content); ?></p>
+        <p><?php echo wp_strip_all_tags($review->post_excerpt); ?></p>
     </blockquote>
 </div>

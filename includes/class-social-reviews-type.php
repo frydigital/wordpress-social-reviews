@@ -10,6 +10,7 @@ class Wordpress_Social_Reviews
         add_action('init', array($this, 'social_reviews_register_post_meta'));
         add_action('manage_social-reviews_posts_custom_column', array($this, 'social_reviews_columns_content'), 10, 2);
         add_filter('manage_social-reviews_posts_columns', array($this, 'social_reviews_columns'));
+        add_filter('use_block_editor_for_post_type', array($this, 'disable_gutenberg'), 10, 2);
     }
 
 
@@ -37,7 +38,7 @@ class Wordpress_Social_Reviews
                 'show_in_nav_menus' => false,
                 'has_archive' => false,
                 'rewrite' => false,
-                'supports' => array('title', 'editor', 'custom-fields', 'taxonomies'),
+                'supports' => array('title', 'excerpt', 'custom-fields', 'taxonomies'),
                 'menu_icon' => 'dashicons-star-half',
                 'show_in_rest' => true,
                 'taxonomies' => array('platform')
@@ -68,6 +69,15 @@ class Wordpress_Social_Reviews
             )
         );
     }
+
+
+    public function disable_gutenberg($current_status, $post_type)
+    {
+        if ($post_type === 'social-reviews') return false;
+        return $current_status;
+    }
+
+
 
     public function social_reviews_columns($columns)
     {
