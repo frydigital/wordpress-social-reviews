@@ -38,7 +38,7 @@ class Wordpress_Social_Reviews
                 'show_in_nav_menus' => false,
                 'has_archive' => false,
                 'rewrite' => false,
-                'supports' => array('title', 'excerpt', 'custom-fields', 'taxonomies'),
+                'supports' => array('title', 'custom-fields', 'taxonomies'),
                 'menu_icon' => 'dashicons-star-half',
                 'show_in_rest' => true,
                 'taxonomies' => array('platform')
@@ -138,7 +138,7 @@ class Wordpress_Social_Reviews
 
     public function generate_star_rating_logos($rating)
     {
-        $rating = intval($rating);
+        $rating = floatval($rating);
         $output = '<span class="star-rating">';
         for ($i = 1; $i <= 5; $i++) {
             if ($i <= $rating) {
