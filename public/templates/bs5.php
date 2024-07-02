@@ -11,18 +11,20 @@ if ($platform) {
 }
 ?>
 
-<div class="col-9 col-sm-4 card p-0 m-2">
+<div class="col-12 col-md-6 col-lg-4">
+    <div class="card mb-4">
     <div class="card-body">
         <div class="review-rating mb-2">
             <?php echo $this->render_platform_logo($source) ?>
-            <div style="opacity: 0.75;"><?php echo $this->generate_star_rating_logos($rating) ?></div>
+            <div class="mt-2" style="opacity: 0.75;"><?php echo $this->generate_star_rating_logos($rating) ?></div>
         </div>
-        <h4 class="card-title my-2"><?php echo get_the_title($review->ID); ?></h4>
+        <h5 class="card-title my-4"><?php echo get_the_title($review->ID); ?></h5>
         <figure>
             <blockquote class="blockquote card-text"><?php echo $review_content; ?></blockquote>
-            <figcaption class="blockquote-footer">
+            <figcaption class="blockquote-footer mt-2">
                 <cite><?php echo $author; ?></cite>. <small><time datetime="<?php echo $review_date; ?>"><?php echo date('F j, Y', strtotime($review_date)); ?></time></small>
             </figcaption>
         </figure>
+    </div>
     </div>
 </div>

@@ -45,29 +45,7 @@ class Wordpress_Social_Reviews
             )
         );
 
-        register_taxonomy(
-            'platform',
-            'social-reviews',
-            array(
-                'labels' => array(
-                    'name' => __('Social Platforms'),
-                    'singular_name' => __('Platform'),
-                    'search_items' => __('Search Platforms'),
-                    'all_items' => __('All Platforms'),
-                    'edit_item' => __('Edit Platform'),
-                    'update_item' => __('Update Platform'),
-                    'add_new_item' => __('Add New Platform'),
-                    'new_item_name' => __('New Platform Name'),
-                    'menu_name' => __('Social Platforms')
-                ),
-                'show_admin_column' => true,
-                'show_ui' => true,
-                'hierarchical' => true,
-                'show_in_rest' => true,
-                'quick_edit' => true,
-                //'meta_box_cb' => 'post_categories_meta_box'
-            )
-        );
+        
     }
 
 
@@ -153,14 +131,25 @@ class Wordpress_Social_Reviews
         return $output;
     }
 
-    public function render_platform_logo($platform = '', $version = 'primary')
+    public function render_platform_logo($platform_name = '', $version = 'primary')
     {
-        if ($platform == '' || $platform == null) {
+        if ($platform_name == '' || $platform_name == null) {
             return;
         }
-        $platform = strtolower($platform);
-        $logo_file = $platform . '_' . $version . '_96.png';
-        $output = '<img class="platform-logo" style="height: 32px;" alt="' . $platform . ' logo" src="' . plugin_dir_url(__DIR__) . 'public/assets/logos/' . $logo_file . '">';
+        $platform = get_term_by('slug', $platform_name, 'platform');
+        $platform_name = strtolower($platform_name);
+        $platform_url = get_term_meta($platform->term_id, 'platform_url', true);
+        $logo_file = $platform_name . '_' . $version . '_96.png';
+        $image_output = '<img class="platform-logo" style="height: 32px;" alt="' . $platform_name . ' logo" src="' . plugin_dir_url(__DIR__) . 'public/assets/logos/' . $logo_file . '">';
+
+        if ($platform_url) {
+            $output = '<a href="' . $platform_url . '" target="_blank">';
+            $output .= $image_output;
+            $output .= '</a>';
+        } else {
+            $output = $image_output;
+        }
+        
         return $output;
     }
 }
