@@ -10,3 +10,7 @@
 - Moved functions to separate files for better organization.
 - Updated Boostrap template with new styles and improved responsiveness.
 - Add URL to the platform taxonomy. Accessible as 'platform_url' in the review object.
+
+## 1.0.3
+### Fixed
+- Update 'star-rating' class to 'social-star-rating' to avoid conflicts with woocommerce styles.

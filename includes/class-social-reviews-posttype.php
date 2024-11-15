@@ -117,7 +117,7 @@ class Wordpress_Social_Reviews
     public function generate_star_rating_logos($rating)
     {
         $rating = floatval($rating);
-        $output = '<span class="star-rating">';
+        $output = '<span class="social-star-rating">';
         for ($i = 1; $i <= 5; $i++) {
             if ($i <= $rating) {
                 $output .= '<img class="star star-fill" style="height: 32px;" alt="filled rating star" src="' . plugin_dir_url(__DIR__) . 'public/assets/icons/star_fill_96.png">';
