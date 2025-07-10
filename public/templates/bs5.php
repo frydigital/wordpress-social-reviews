@@ -12,7 +12,7 @@ if ($platform) {
 ?>
 
 <div class="col-12 col-md-6 col-lg-4">
-    <div class="card mb-4">
+    <div class="card h-100 border">
     <div class="card-body">
         <div class="review-rating mb-2">
             <?php echo $this->render_platform_logo($source) ?>
@@ -21,7 +21,7 @@ if ($platform) {
         <h5 class="card-title my-4"><?php echo get_the_title($review->ID); ?></h5>
         <figure>
             <blockquote class="blockquote card-text"><?php echo $review_content; ?></blockquote>
-            <figcaption class="blockquote-footer mt-2">
+            <figcaption class="blockquote-footer mt-2 text-black">
                 <cite><?php echo $author; ?></cite>. <small><time datetime="<?php echo $review_date; ?>"><?php echo date('F j, Y', strtotime($review_date)); ?></time></small>
             </figcaption>
         </figure>
