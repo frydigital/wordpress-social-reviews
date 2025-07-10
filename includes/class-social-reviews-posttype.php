@@ -120,11 +120,11 @@ class Wordpress_Social_Reviews
         $output = '<span class="social-star-rating">';
         for ($i = 1; $i <= 5; $i++) {
             if ($i <= $rating) {
-                $output .= '<img class="star star-fill" style="height: 32px;" alt="filled rating star" src="' . plugin_dir_url(__DIR__) . 'public/assets/icons/star_fill_96.png">';
+                $output .= '<img class="star star-fill" height="32" width="32" style="height: 32px;" alt="filled rating star" src="' . plugin_dir_url(__DIR__) . 'public/assets/icons/star_fill_96.png">';
             } elseif ($i - 0.5 == $rating) {
-                $output .= '<img class="star star-half-fill" style="height: 32px;" alt="half filled rating star" src="' . plugin_dir_url(__DIR__) . 'public/assets/icons/star_half_96.png">';
+                $output .= '<img class="star star-half-fill" height="32" width="32" style="height: 32px;" alt="half filled rating star" src="' . plugin_dir_url(__DIR__) . 'public/assets/icons/star_half_96.png">';
             } else {
-                $output .= '<img class="star star-empty" style="height: 32px;" alt="empty rating star" src="' . plugin_dir_url(__DIR__) . 'public/assets/icons/star_empty_96.png">';
+                $output .= '<img class="star star-empty" height="32" width="32" style="height: 32px;" alt="empty rating star" src="' . plugin_dir_url(__DIR__) . 'public/assets/icons/star_empty_96.png">';
             }
         }
         $output .= '</span>';
@@ -140,7 +140,7 @@ class Wordpress_Social_Reviews
         $platform_name = strtolower($platform_name);
         $platform_url = get_term_meta($platform->term_id, 'platform_url', true);
         $logo_file = $platform_name . '_' . $version . '_96.png';
-        $image_output = '<img class="platform-logo" style="height: 32px;" alt="' . $platform_name . ' logo" src="' . plugin_dir_url(__DIR__) . 'public/assets/logos/' . $logo_file . '">';
+        $image_output = '<img class="platform-logo" height="32" width="32" style="height: 32px;" alt="' . $platform_name . ' logo" src="' . plugin_dir_url(__DIR__) . 'public/assets/logos/' . $logo_file . '">';
 
         if ($platform_url) {
             $output = '<a href="' . $platform_url . '" target="_blank">';
