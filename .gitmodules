@@ -1,0 +1,3 @@
+[submodule "plugins/wordpress-social-reviews"]
+	path = plugins/wordpress-social-reviews
+	url = https://github.com/fryshaun/wordpress-social-reviews.git
